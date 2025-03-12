@@ -2,7 +2,23 @@
 # CUSTOM HELPER FUNCTIONS
 ########################################################################
 
+# Look for the src folders
+# Need to only run once per environment
+
+import sys
+import os
+
+# Get the path to the 'src' directory
+src_path = os.path.abspath(os.path.join(os.getcwd(), '../src'))
+
+# Add the 'src' folder to sys.path
+if src_path not in sys.path:
+  sys.path.append(src_path)
+
+########################################################################
+########################################################################
 # Function for evaluating different regression models
+########################################################################
 
 from sklearn.metrics import (mean_absolute_error, mean_squared_error, root_mean_squared_error,
 r2_score, mean_absolute_percentage_error)
@@ -34,8 +50,9 @@ def evaluate_regression(model, X, y, name='model'):
   return results
 
 ########################################################################
-
+########################################################################
 # Custom transformer for dropping outliers
+########################################################################
 
 import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -81,10 +98,10 @@ class OutlierRemover(BaseEstimator, TransformerMixin):
     return X[mask].reset_index(drop=True)
 
 
-
 ########################################################################
-
+########################################################################
 # Function for checking for outliers
+########################################################################
 
 def check_outliers(data, column, iqr_multiplier=1.5):
   # calculate 25% and 75% quantile
@@ -111,13 +128,21 @@ def check_outliers(data, column, iqr_multiplier=1.5):
   print(f'Using IQR * {iqr_multiplier}, {num_outliers} outliers were detected.')
   print(f'If removed, {percent_outlier} of the data will be dropped.')
 
+
+########################################################################
+# Function for evaluation classification models
 ########################################################################
 
 import matplotlib.pyplot as plt
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report, ConfusionMatrixDisplay
+from sklearn.datasets import load_iris
+from sklearn.metrics import (accuracy_score, precision_score, recall_score, f1_score, classification_report,
+                             ConfusionMatrixDisplay, roc_auc_score)
 
 
-def eval_classification(model, X_train, y_train, X_test, y_test, model_name='model', results_frame=None, pos_label=1, average='binary'):
+def eval_classification(model, X_train, y_train, X_test, y_test, model_name='model', results_frame=None, pos_label=1,
+                        average='binary', roc_auc_avg='macro'):
+
+  model.fit(X_train, y_train)
   train_pred = model.predict(X_train)
   test_pred = model.predict(X_test)
 
@@ -140,6 +165,8 @@ def eval_classification(model, X_train, y_train, X_test, y_test, model_name='mod
   results['test_recall'] = recall_score(y_test, test_pred, pos_label=pos_label, average=average)
   results['train_f1'] = f1_score(y_train, train_pred, pos_label=pos_label, average=average)
   results['test_f1'] = f1_score(y_test, test_pred, pos_label=pos_label, average=average)
+  results['train_auc'] = roc_auc_score(y_train, model.predict_proba(X_train)[:, 1], average=roc_auc_avg, multi_class='ovr')
+  results['test_auc'] = roc_auc_score(y_test, model.predict_proba(X_test)[:, 1], average=roc_auc_avg, multi_class='ovr')
 
   if results_frame is not None:
     results = pd.concat([results_frame, results])
