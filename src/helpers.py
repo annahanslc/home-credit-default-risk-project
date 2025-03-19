@@ -148,12 +148,12 @@ def eval_classification(model, X_train, y_train, X_test, y_test, model_name='mod
 
   print('Train Evaluation')
   print(classification_report(y_train, train_pred))
-  ConfusionMatrixDisplay.from_predictions(y_train, train_pred, cmap='Blues')
+  ConfusionMatrixDisplay.from_predictions(y_train, train_pred, normalize='true', cmap='Blues')
   plt.show()
 
   print('Test Evaluation')
   print(classification_report(y_test, test_pred))
-  ConfusionMatrixDisplay.from_predictions(y_test, test_pred, cmap='Greens')
+  ConfusionMatrixDisplay.from_predictions(y_test, test_pred, normalize='true', cmap='Greens')
   plt.show()
 
   results = pd.DataFrame(index=[model_name])
@@ -171,4 +171,4 @@ def eval_classification(model, X_train, y_train, X_test, y_test, model_name='mod
   if results_frame is not None:
     results = pd.concat([results_frame, results])
 
-  return results
+  return results, train_pred, test_pred
