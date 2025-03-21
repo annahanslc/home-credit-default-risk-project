@@ -4,7 +4,7 @@
 
 
 
-### Project Objective
+### Project Objective  🥅
 
 Home buyers who have little or insufficient credit history struggle to obtain loans. By using alternative information alongside traditional credit information, my goal is to produce a reliable model to help predict home loan default. The ultimate objective is to meet the needs of the underserved market while minimizing default risk for the company.
 
@@ -20,7 +20,7 @@ Home buyers who have little or insufficient credit history struggle to obtain lo
 8. [References](#References)
 
 
-### About the Data
+### About the Data 📊
 
 The original datasets can be found here: [https://www.kaggle.com/competitions/home-credit-default-risk/data]
 
