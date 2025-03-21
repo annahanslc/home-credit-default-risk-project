@@ -46,10 +46,19 @@ From bureau table:
 
 My preprocessing pipeline includes the following steps:
 
-1. Feature cleaning: 'DAYS_EMPLOYED' are mostly negative values because the number indicates for how many previous days have they been employed at their current employer, relative to the date of the application. However, there are 55,374 observations that have a positive value of 365243, furthermore, there are no other values in between 0 and 365243. This indicates that '365243' is actually a placeholder value. This makes me wonder how the data is accounting for customers who are not employed at all. Checking the frequency of the value 0, there are only 2 observations. This confirms my hypothesis that '365243' is inputed for those who are not emloyed. Since DAYS_EMPLOYED is a numeric discrete feature, the numeric correlations between values are important, but this placeholder value will skew the data significantly and obscure the numeric relationships between real datapoints. In order to preserve the numeric significance of those with job (negative numbers, relative to the date of their application), but remove the skew caused by 365243, I will replace DAYS_EMPLOYED's placeholder value of 365243 with 365
+1. **Feature cleaning:** 'DAYS_EMPLOYED' are mostly negative values because the number indicates for how many previous days have they been employed at their current employer, relative to the date of the application. However, there are 55,374 observations that have a positive value of 365243, furthermore, there are no other values in between 0 and 365243. This indicates that '365243' is actually a placeholder value. This makes me wonder how the data is accounting for customers who are not employed at all. Checking the frequency of the value 0, there are only 2 observations. This confirms my hypothesis that '365243' is inputed for those who are not emloyed. Since DAYS_EMPLOYED is a numeric discrete feature, the numeric correlations between values are important, but this placeholder value will skew the data significantly and obscure the numeric relationships between real datapoints. In order to preserve the numeric significance of those with job (negative numbers, relative to the date of their application), but remove the skew caused by 365243, I will replace DAYS_EMPLOYED's placeholder value of 365243 with 365
 
-2. Drop outliers: this proprocessor is currently not being used, but 
+2. **Feature filtering:** This proprocessor functions as a filter to filter out unexpected columns. It also helps to organize which features are original to the dataset, and which ones were engineered. As I conduct feature selection, the filters helps me ensure that only the selected features remain in the pipeline.
 
+3. **Imputing:** All features, original and engineered, are equipped with an imputation method. This will safeguard against nulls in new, incoming data. For categorical features, they are mostly imputed using the most frequent value. For numeric features, they are imputed either with 0, or with the median.
+
+4. **Encoding:** Categorical features are encoded using the OneHotEncoder. It is set to drop one out of the two columns if it is a binary feature, and require a minimum frequency of 100, which means that all values that have fewer than 100 observations are combined into a separate column for infrequent values. 
+
+5. **Log Tranformer:** Many models, include logistic regression, SVM's and KNN, assume that data is normally distributed. A skewed distribution will mask the true linear relationship between features and the target variable. In order to help the models better to detect linear patterns in the data, I will use log transformation to make skewed distributions more normal. 
+
+6. **Scaling:** Numeric, non-OneHotEncoded, features are scaled using the StandardScaler. The StandardScaler standardizes features so that it has a mean of 0 and standard deviation of 1.
+
+   
 ### Model Selection
 
 
