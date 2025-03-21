@@ -61,6 +61,26 @@ My preprocessing pipeline includes the following steps:
    
 ### Model Selection
 
+1. **Addressing Target Imbalance:** The dataset contains 8% of the positive class, which is loan default, and 92% of the negative class, which is non-default. This imbalance will encourage models to overly predict the negative class, which means that the model is incentivized to predict that a customer will *not* default. This is counterproductive to the goals of my model, as the objective is to reduce risk of loan-default, which means the model needs to vigilently predict defaults. In order to reduce this imbalance, I will use undersampling, balanced class weight, SMOTE, and statifying the train test split.
+
+2. Main models performance:
+
+
+|                      Model |   train_accuracy |   test_accuracy |   train_precision |   test_precision |   train_recall |   test_recall |   train_f1 |   test_f1 |   train_auc |   test_auc |
+|---------------------------:|-----------------:|----------------:|------------------:|-----------------:|---------------:|--------------:|-----------:|----------:|------------:|-----------:|
+|       LogReg Undersampling |         0.614923 |        0.618799 |          0.131898 |         0.133275 |       0.675428 |      0.676334 |   0.220698 |  0.222672 |    0.693414 |   0.698263 |
+|            LogReg Balanced |         0.641012 |        0.646668 |          0.137057 |         0.139472 |       0.650806 |      0.653172 |   0.226429 |  0.229861 |    0.695179 |   0.700966 |
+| DecisionTree leaf=100 d=10 |         0.681819 |        0.677577 |          0.15658  |         0.15035  |       0.670544 |      0.643706 |   0.253877 |  0.243765 |    0.738248 |   0.718206 |
+|               XGB Balanced |         0.726086 |        0.723168 |          0.186018 |         0.178185 |       0.708862 |      0.672508 |   0.294701 |  0.281725 |    0.794591 |   0.768486 |
+
+Other models:
+
+|                      Model |   train_accuracy |   test_accuracy |   train_precision |   test_precision |   train_recall |   test_recall |   train_f1 |   test_f1 |   train_auc |   test_auc |
+|---------------------------:|-----------------:|----------------:|------------------:|-----------------:|---------------:|--------------:|-----------:|----------:|------------:|-----------:|
+|   RandomForest d=12, n=500 |         0.686596 |        0.678162 |          0.155255 |         0.136704 |       0.648993 |      0.561934 |   0.250569 |  0.219910 |    0.736374 |   0.672979 |
+|          LogReg with SMOTE |         0.665698 |        0.663602 |          0.143105 |         0.144358 |       0.629249 |      0.630714 |   0.233180 |  0.234943 |    0.703414 |   0.703288 |
+
+
 
 ### Feature Selection
 
