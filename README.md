@@ -10,13 +10,13 @@ Home buyers who have little or insufficient credit history struggle to obtain lo
 
 ### Directory 
 
-1. [About the Data](#-About-the-Data)
-2. [Feature Engineering](#-Feature-Engineering)
-3. [Preprocessing Pipeline](#-Preprocessing-Pipeline)
-4. [Model Selection](#-Model-Selection)
-5. [Feature Selection](#-Feature-Selection)
-6. [Analysis](#-Analysis)
-7. [Next Steps](#-Next-Steps)
+1. [About the Data](#About-the-Data)
+2. [Feature Engineering](#Feature-Engineering)
+3. [Preprocessing Pipeline](#Preprocessing-Pipeline)
+4. [Model Selection](#Model-Selection)
+5. [Feature Selection](#Feature-Selection)
+6. [Analysis](#Analysis)
+7. [Next Steps](#Next-Steps)
 
 
 ### About the Data
