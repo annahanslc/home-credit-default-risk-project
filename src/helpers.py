@@ -172,3 +172,40 @@ def eval_classification(model, X_train, y_train, X_test, y_test, model_name='mod
     results = pd.concat([results_frame, results])
 
   return results, train_pred, test_pred
+
+
+########################################################################
+# Function for barplot by percentage
+########################################################################
+
+def barplot_by_percentage(X, feature, target, figsize=(8, 5), rotation=45, palette='viridis'):
+
+  import seaborn as sns
+
+  # Compute counts per group
+  group_counts = X.groupby([feature, target]).size().reset_index(name="count")
+
+  # Convert counts to percentage within each group
+  group_counts["percentage"] = group_counts.groupby(feature)["count"].transform(lambda x: x / x.sum() * 100)
+
+  # Create the plot
+  plt.figure(figsize=figsize)
+  ax = sns.barplot(data=group_counts, x=feature, y="percentage", hue=target, palette=palette)
+
+  # Adjust the label placement
+  for container in ax.containers:
+      for bar in container:
+          height = bar.get_height()  # Get bar height (percentage value)
+          ax.text(
+              bar.get_x() + bar.get_width() / 2,  # Center text horizontally
+              height + 1,  # Slightly above the bar
+              f"{height:.1f}%",  # Format percentage
+              ha="center", va="bottom"
+          )
+
+  # Labels and title
+  plt.ylabel("Percentage (%)")
+  plt.title(f"{feature} by TARGET (as Percentage)")
+  plt.xticks(rotation=rotation)
+
+  plt.show()
