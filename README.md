@@ -204,6 +204,12 @@ Observations based the feature importances:
 
 ### Next Steps
 
+1. Remove biases - home loans should be reviewed according to the Fair Housing Act and Equal Credit Opportunity Act. Our lending algorithms should not discriminate based on protected characteristics like race, color, religion, sex, national origin, familial status, or disability. Specifically, my current model considers Age, Gender and Martial Status. This needs to be rectified before the model is utilized in any loan process.
+
+2. Improve data gathering - the dataset contains features that describe the borrower's social and living conditions. These may shed additional insights into credit worthiness. However, the data is lacking, and missing for more than half of the observations. If we have more complete data, more information can be gleaned from these features.
+
+3. Additional modeling - now that my dataset has been selected down to 30 features, I can run models and conduct hyperparameter tuning more efficiently. Especially, I would like to conduct additional modeling using KNN, SVC and LGBM.
+
 
 ### References:
 
