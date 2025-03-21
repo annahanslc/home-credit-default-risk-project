@@ -176,6 +176,30 @@ Observations based the feature importances:
 - The model utilizes age in its prediction, but it does not appear that the relationship is linear across age. Regardless, this features needs to be reconsidered due to discrimination.
 - Not owning a car is a driver of default in this model. I will check the correlation of the raw data to see if the correlation shows similar tendencies.
 
+**3. Analysis of Correlations**
+
+1. DAYS_EMPLOYED vs TARGET: The target, default, is correlated with a shorter employment period.
+
+      ![days_employed_box_transparent](https://github.com/user-attachments/assets/a1e2a32c-1e59-4130-95f2-d506d97d8109)
+
+
+2. cc_avg_credit_usage_ratio vs TARGET: A higher average credit card balance to limit ratio is notably more correlated with default
+
+      ![cc_avg_credit_usage_ratio_transparent](https://github.com/user-attachments/assets/6fe349ce-9979-4591-8037-c01b07120806)
+
+
+3. avg_cc_cnt_ATM_drawings: The average number of ATM drawings per credit card per month correlates more ATM drawings to more likelihood of default.
+
+      ![avg_num_ATM_transparent](https://github.com/user-attachments/assets/aa3083da-1df4-4d35-8f7d-66e8b6b67bd7)
+
+
+4. NAME_CONTRACT_TYPE: Cash loans are more likely to default than revolving loans.
+
+      ![contract_type_transparent](https://github.com/user-attachments/assets/7f87366f-7f37-4e7a-bfe3-5fc43ae0ae1b)
+
+5. FLAG_OWN_CAR: Clients who own a car has a lower rate of default in this dataset. This makes sense, because purchasing a vehicle also requires obtaining a loan. If the client was approved for a car loan, they are more likely to qualify for a home loan than someone who was not approved for a car loan.
+
+      ![own_car_transparent](https://github.com/user-attachments/assets/4431834a-1127-49f3-8a20-fb96cc5f7d98)
 
 
 ### Next Steps
