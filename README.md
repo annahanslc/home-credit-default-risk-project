@@ -17,6 +17,7 @@ Home buyers who have little or insufficient credit history struggle to obtain lo
 5. [Feature Selection](#Feature-Selection)
 6. [Analysis](#Analysis)
 7. [Next Steps](#Next-Steps)
+8. [References](#References)
 
 
 ### About the Data
@@ -211,6 +212,6 @@ Observations based the feature importances:
 3. Additional modeling - now that my dataset has been selected down to 30 features, I can run models and conduct hyperparameter tuning more efficiently. Especially, I would like to conduct additional modeling using KNN, SVC and LGBM.
 
 
-### References:
+### References
 
 Banner Image from <a href="https://www.freevector.com/pastel-abstract-geometric-houses-background-71471">FreeVector.com</a>
